@@ -9,10 +9,13 @@ class Row extends StatelessComponent {
   final String id;
 
   //* The alignment of the children along the cross axis.
-  final CrossAxisAlignment crossAxisAlignment;
+  final JustifyContent justifyContent;
 
   //* The alignment of the children along the main axis.
-  final MainAxisAlignment mainAxisAlignment;
+  final AlignItems alignItems;
+
+  ///* The alignment of the text.
+  // final TextAlign textAlign;
 
   //* The children to align.
   final List<Component> children;
@@ -30,15 +33,16 @@ class Row extends StatelessComponent {
     super.key,
     this.space,
     this.margin = '0px',
-    this.mainAxisAlignment = MainAxisAlignment.start,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
+    // this.textAlign = TextAlign.left,
+    this.alignItems = AlignItems.start,
+    this.justifyContent = JustifyContent.center,
     required this.id,
     required this.children,
   });
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    final internal = 'jaspr_ui_row_${key.hashCode}';
+    final internal = 'jaspr_ui_row_$id';
 
     yield Style(styles: [
       css('.$internal').raw({
@@ -49,8 +53,9 @@ class Row extends StatelessComponent {
         'overflow': 'hidden',
         'flex-wrap': 'nowrap',
         'flex-direction': 'row',
-        'justify-content': mainAxisAlignment.value,
-        'align-items': crossAxisAlignment.value,
+        // 'text-align': textAlign.value,
+        'justify-content': alignItems.value,
+        'align-items': justifyContent.value,
       }),
     ]);
 
@@ -58,10 +63,11 @@ class Row extends StatelessComponent {
       <Component>[],
       (children, combined) => [
         ...children,
-        if (children.isNotEmpty) VerticalGap(
-          gap: space ?? 8.px,
-          id: 'gap_${combined.hashCode}',
-        ),
+        if (children.isNotEmpty)
+          VerticalGap(
+            gap: space ?? 8.px,
+            id: 'gap_$id',
+          ),
         combined,
       ],
     );

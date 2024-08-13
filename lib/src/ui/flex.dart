@@ -8,10 +8,10 @@ class FlexBox extends StatelessComponent {
   final String id;
 
   //* The alignment of the children along the cross axis.
-  final CrossAxisAlignment crossAxisAlignment;
+  final JustifyContent justifyContent;
 
   //* The alignment of the children along the main axis.
-  final MainAxisAlignment mainAxisAlignment;
+  final AlignItems alignItems;
 
   //* The children to align.
   final List<Component> children;
@@ -22,19 +22,18 @@ class FlexBox extends StatelessComponent {
   //* The space between each child, defaults to 8px.
   final Unit? space;
 
-    //* The margin around the children, defaults to 0px
-  /// [All]: '8px' 
+  //* The margin around the children, defaults to 0px
+  /// [All]: '8px'
   /// [Vertical and Horizontal]: '8px 16px'
   /// [top, right, bottom, left]: '8px 16px 24px 32px'.
   final String margin;
-
 
   FlexBox({
     super.key,
     this.space,
     this.margin = '0',
-    this.mainAxisAlignment = MainAxisAlignment.start,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.alignItems = AlignItems.start,
+    this.justifyContent = JustifyContent.center,
     required this.id,
     required this.direction,
     required this.children,
@@ -43,7 +42,7 @@ class FlexBox extends StatelessComponent {
   @override
   Iterable<Component> build(BuildContext context) sync* {
     final isColumn = direction == FlexDirection.column;
-    final internal = 'jaspr_ui_flex_${key.hashCode}';
+    final internal = 'jaspr_ui_flex_$id';
 
     yield Style(styles: [
       css('.$internal').raw({
@@ -51,10 +50,8 @@ class FlexBox extends StatelessComponent {
         'display': 'flex',
         'margin': margin,
         'flex-direction': direction.value,
-        'justify-content':
-            isColumn ? mainAxisAlignment.value : crossAxisAlignment.value,
-        'align-items':
-            isColumn ? crossAxisAlignment.value : mainAxisAlignment.value,
+        'justify-content': isColumn ? alignItems.value : justifyContent.value,
+        'align-items': isColumn ? justifyContent.value : alignItems.value,
       }),
     ]);
 
@@ -65,12 +62,12 @@ class FlexBox extends StatelessComponent {
         if (children.isNotEmpty)
           if (isColumn)
             HorizontalGap(
-              id: 'jaspr_ui_horizontal_gap_${combined.hashCode}',
+              id: 'jaspr_ui_horizontal_gap_$id',
               gap: space ?? 8.px,
             )
           else
             VerticalGap(
-              id: 'jaspr_ui_vertical_gap_${combined.hashCode}',
+              id: 'jaspr_ui_vertical_gap_$id',
               gap: space ?? 8.px,
             ),
         combined,

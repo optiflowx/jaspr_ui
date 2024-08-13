@@ -35,7 +35,7 @@ class Icon extends StatelessComponent {
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    final internal = 'jaspr_ui_icon_${key.hashCode}';
+    final internal = 'jaspr_ui_icon_$id';
     yield Style(styles: [
       css('.$internal').raw({
         'font-size': size?.value ?? '24px',

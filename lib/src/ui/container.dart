@@ -59,6 +59,9 @@ class Container extends StatelessComponent {
   ///* The blur radius of the container.
   final double blurRadius;
 
+    ///* The alignment of the text.
+  final TextAlign textAlign;
+
   Container({
     this.width,
     this.height,
@@ -68,6 +71,7 @@ class Container extends StatelessComponent {
     this.padding = '0px',
     this.blur = false,
     this.blurRadius = 15,
+    this.textAlign = TextAlign.start,
     this.justifyContent = JustifyContent.start,
     this.alignItems = AlignItems.start,
     this.backgroundColor = Colors.transparent,
@@ -84,6 +88,7 @@ class Container extends StatelessComponent {
         'display': 'flex',
         'overflow': 'hidden',
         'transition': 'all 0.5s',
+        'text-align': textAlign.value,
         'width': width?.value ?? 'unset',
         'height': height?.value ?? 'unset',
         'padding': padding,

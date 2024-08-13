@@ -8,11 +8,14 @@ class Column extends StatelessComponent {
   //! The id  must be unique to avoid css conflicts.
   final String id;
 
-  //* The alignment of the children along the cross axis.
-  final CrossAxisAlignment crossAxisAlignment;
-
   //* The alignment of the children along the main axis.
-  final MainAxisAlignment mainAxisAlignment;
+  final JustifyContent justifyContent;
+
+  ///* The alignment of the children along the cross axis.
+  final AlignItems alignItems;
+
+  ///* The alignment of the text.
+  final TextAlign textAlign;
 
   //* The children to align.
   final List<Component> children;
@@ -30,15 +33,16 @@ class Column extends StatelessComponent {
     super.key,
     this.space,
     this.margin = '0px',
-    this.mainAxisAlignment = MainAxisAlignment.start,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.textAlign = TextAlign.left,
+    this.alignItems = AlignItems.center,
+    this.justifyContent = JustifyContent.left,
     required this.id,
     required this.children,
   });
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    final internal = 'jaspr_ui_column_${key.hashCode}';
+    final internal = 'jaspr_ui_column_$id';
 
     yield Style(styles: [
       css('.$internal').raw({
@@ -47,8 +51,9 @@ class Column extends StatelessComponent {
         'display': 'flex',
         'flex-direction': 'column',
         'margin': margin,
-        'justify-content': mainAxisAlignment.value,
-        'align-items': crossAxisAlignment.value,
+        'text-align': textAlign.value,
+        'justify-content': justifyContent.value,
+        'align-items': alignItems.value,
       }),
     ]);
 
@@ -58,7 +63,7 @@ class Column extends StatelessComponent {
         ...children,
         if (children.isNotEmpty)
           HorizontalGap(
-            id: 'jaspr_ui_horizontal_gap_${combined.hashCode}',
+            id: 'jaspr_ui_horizontal_gap_$id',
             gap: space ?? 8.px,
           ),
         combined,
