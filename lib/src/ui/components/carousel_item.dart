@@ -1,18 +1,14 @@
 import 'package:jaspr/browser.dart';
 
-class HorizontalSliderItem extends StatelessComponent {
+class CarouselItem extends StatelessComponent {
   final Component child;
   final double height;
 
-  const HorizontalSliderItem({
-    super.key,
-    required this.child,
-    this.height = 375,
-  });
+  const CarouselItem({super.key, required this.child, this.height = 425});
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    final internal = 'jaspr_ui_horizontal_slider_item';
+    final internal = 'jaspr_ui_carousel_item';
 
     yield Style(styles: [
       css('.$internal').raw({

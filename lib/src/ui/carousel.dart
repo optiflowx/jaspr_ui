@@ -1,26 +1,24 @@
 import 'package:jaspr/browser.dart';
 import 'package:jaspr_ui/jaspr_ui.dart';
 
-class HorizontalSlider extends StatelessComponent {
+class Carousel extends StatelessComponent {
   final String id, padding, margin;
-  final bool isFullSizeView;
 
-  final List<HorizontalSliderItem> items;
-  const HorizontalSlider({
+  final List<CarouselItem> items;
+  const Carousel({
     super.key,
     required this.id,
     required this.items,
-    this.padding = '0 5%',
-    this.margin = '5% 0',
-    this.isFullSizeView = false,
+    this.padding = '0',
+    this.margin = '0',
   });
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    final internal = 'jaspr_ui_horizontal_slider';
-    final iconRight = 'jaspr_ui_horizontal_slider_icon_right';
-    final iconLeft = 'jaspr_ui_horizontal_slider_icon_left';
-    final wrapper = 'jaspr_ui_horizontal_slider_wrapper';
+    final internal = 'jaspr_ui_carousel';
+    final iconRight = 'jaspr_ui_carousel_icon_right';
+    final iconLeft = 'jaspr_ui_carousel_icon_left';
+    final wrapper = 'jaspr_ui_carousel_wrapper';
 
     // Styles
     yield Style(styles: [
@@ -35,6 +33,7 @@ class HorizontalSlider extends StatelessComponent {
         'margin': margin,
         'display': 'grid',
         'grid-auto-flow': 'column',
+        'grid-auto-columns': '100%',
         'scroll-snap-type': 'x mandatory',
         'scroll-behavior': 'smooth',
         'overflow-x': 'auto',
@@ -59,40 +58,12 @@ class HorizontalSlider extends StatelessComponent {
         'transform': 'translateY(-50%)',
         'cursor': 'pointer',
       }),
-
-      //Media queries
-      if (!isFullSizeView) ...[
-        MediaQuery.mobile([
-          css('.$internal').raw({
-            'grid-auto-columns': '100%',
-          }),
-        ]),
-        MediaQuery.tablet([
-          css('.$internal').raw({
-            'grid-auto-columns': 'calc((100% / 2) - 10px)',
-          }),
-        ]),
-        MediaQuery.laptop([
-          css('.$internal').raw({
-            'grid-auto-columns': 'calc((100% / 3) - 15px)',
-          }),
-        ]),
-        MediaQuery.desktop([
-          css('.$internal').raw({
-            'grid-auto-columns': 'calc((100% / 4) - 20px)',
-          }),
-        ]),
-      ] else ...[
-        css('.$internal').raw({
-          'grid-auto-columns': '100%',
-        }),
-      ]
     ]);
 
     // HorizontalSlider
     yield div(classes: wrapper, [
       Icon(
-        id: 'jaspr_ui_left',
+        id: 'jaspr_ui_carousel_left',
         icon: 'ri-arrow-left-wide-line',
         classes: iconLeft,
         iconColor: Colors.black,
@@ -103,7 +74,7 @@ class HorizontalSlider extends StatelessComponent {
         'click': (event) {},
       }),
       Icon(
-        id: 'jaspr_ui_right',
+        id: 'jaspr_ui_carousel_right',
         icon: 'ri-arrow-right-wide-line',
         classes: iconRight,
         iconColor: Colors.black,

@@ -7,6 +7,7 @@ export 'src/enums/alignment.dart';
 export 'src/styles/media_query.dart';
 
 // UI
+export 'src/ui/exports/carousel.exports.dart';
 export 'src/ui/exports/horizontal_slider.exports.dart';
 export 'src/ui/wrap.dart';
 export 'src/ui/icon.dart';
