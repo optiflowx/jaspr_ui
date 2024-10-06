@@ -62,22 +62,22 @@ class HorizontalSlider extends StatelessComponent {
 
       //Media queries
       if (!isFullSizeView) ...[
-        MediaQuery.mobile([
+        MediaQueryExt.mobile([
           css('.$internal').raw({
             'grid-auto-columns': '100%',
           }),
         ]),
-        MediaQuery.tablet([
+        MediaQueryExt.tablet([
           css('.$internal').raw({
             'grid-auto-columns': 'calc((100% / 2) - 10px)',
           }),
         ]),
-        MediaQuery.laptop([
+        MediaQueryExt.laptop([
           css('.$internal').raw({
             'grid-auto-columns': 'calc((100% / 3) - 15px)',
           }),
         ]),
-        MediaQuery.desktop([
+        MediaQueryExt.desktop([
           css('.$internal').raw({
             'grid-auto-columns': 'calc((100% / 4) - 20px)',
           }),
