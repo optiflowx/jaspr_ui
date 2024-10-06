@@ -2,7 +2,7 @@ name: jaspr_ui
 description: UI library for Jaspr.
 by: Prince Bottoman(optiflowx)
 
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/optiflowx/jaspr_ui
 publish_to: github
 
