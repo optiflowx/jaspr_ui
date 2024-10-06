@@ -1,15 +1,17 @@
 name: jaspr_ui
 description: UI library for Jaspr.
 by: Prince Bottoman(optiflowx)
+
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/optiflowx/jaspr_ui
+publish_to: github
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.5.0 <5.0.0'
 
 # Add regular dependencies here.
 dependencies:
-  jaspr: ^0.13.3
+  jaspr: ^0.16.0
   # path: ^1.8.0
 
 dev_dependencies:
